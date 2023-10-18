@@ -1,12 +1,12 @@
-const { response } = require("../app");
+// Import required modules
 const knex = require("../db/connection");
 
-// get all reservations from db
+// Function to retrieve all reservations from the database
 function list() {
   return knex("reservations").select("*");
 }
 
-// get resrevation by ID
+// Function to retrieve a specific reservation by its ID from the database
 function read(reservationId) {
   return knex("reservations")
     .select("*")
@@ -14,6 +14,7 @@ function read(reservationId) {
     .first();
 }
 
+// Function to retrieve reservations for a specific date from the database
 function readDate(reservationDate) {
   return knex("reservations")
     .select("*")
@@ -22,7 +23,7 @@ function readDate(reservationDate) {
     .orderBy("reservation_time", "asc");
 }
 
-// create a new reservation
+// Function to create a new reservation in the database
 function create(reservation) {
   return knex("reservations")
     .insert(reservation)
@@ -30,13 +31,14 @@ function create(reservation) {
     .then((createdReservation) => createdReservation[0]);
 }
 
-// updates an existing reservation
+// Function to update the status of an existing reservation in the database
 function update(reservation) {
   return knex("reservations")
     .where({ reservation_id: reservation.reservation_id })
     .update({ status: reservation.status });
 }
 
+// Function to update an existing reservation in the database
 function updateRes(updatedReservation) {
   return knex("reservations")
     .select("*")
@@ -45,11 +47,12 @@ function updateRes(updatedReservation) {
     .then((response) => response[0]);
 }
 
-// destroy an specific reservation
+// Function to delete a specific reservation from the database
 function destroy(reservationId) {
   return knex("reservations").where({ reservationId }).del();
 }
 
+// Function to search for a reservation by mobile number in the database
 function search(mobile_number) {
   return knex("reservations")
     .whereRaw(
@@ -59,6 +62,7 @@ function search(mobile_number) {
     .orderBy("reservation_date");
 }
 
+// Export all the functions to be used elsewhere in the application
 module.exports = {
   list,
   read,
