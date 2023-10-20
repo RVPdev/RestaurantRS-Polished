@@ -68,13 +68,13 @@ export async function listReservations(params, signal) {
     .then(formatReservationTime);
 }
 
+// Fetches a list of all tables from the API
 export async function listTables(signal) {
   const url = `${API_BASE_URL}/tables`;
   return await fetchJson(url, { headers, signal }, []);
 }
 
-// makes a call to the api submititng the reservation information
-
+// Sends a POST request to create a new reservation
 export async function createReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
   const options = {
@@ -86,8 +86,7 @@ export async function createReservation(reservation, signal) {
   return await fetchJson(url, options, {});
 }
 
-// makes a call to the api submititng the tables information
-
+// Sends a POST request to create a new table
 export async function createTable(reservation, signal) {
   const url = `${API_BASE_URL}/tables`;
   const options = {
@@ -99,11 +98,7 @@ export async function createTable(reservation, signal) {
   return await fetchJson(url, options, {});
 }
 
-/**
- * Reads the reservation with the specified reservation_id
- * @returns {Promise<reservation>}
- *  a promise that resolves to the reservation with the specified reservation_id.
- */
+// Sends a GET request to read the details of a specific reservation
 export async function readReservation(reservation_id, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   return await fetchJson(url, { headers, signal }, {})
@@ -111,6 +106,7 @@ export async function readReservation(reservation_id, signal) {
     .then(formatReservationTime);
 }
 
+// Sends a PUT request to seat a reservation at a specific table
 export async function seatReservation(reservation_id, table_id, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
@@ -122,6 +118,7 @@ export async function seatReservation(reservation_id, table_id, signal) {
   return await fetchJson(url, options, {});
 }
 
+// Sends a DELETE request to mark a table as available after guests have left
 export async function finishSeat(table_id, reservation_id, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
@@ -136,7 +133,7 @@ export async function finishSeat(table_id, reservation_id, signal) {
   return await fetchJson(url, options);
 }
 
-
+// Sends a PUT request to cancel a reservation
 export async function changeStatusCancelled (reservation_id, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
   const options = {
@@ -148,6 +145,7 @@ export async function changeStatusCancelled (reservation_id, signal) {
   return await fetchJson(url, options, {});
 }
 
+// Sends a PUT request to update an existing reservation
 export async function updateReservation(reservation, reservation_id, signal) {
   const url = new URL(`${API_BASE_URL}/reservations/${reservation_id}`);
   const options = {
