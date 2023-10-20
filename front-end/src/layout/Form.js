@@ -1,10 +1,15 @@
+// Import required modules
 import React from "react";
 import ErrorAlert from "./ErrorAlert";
 
+// Form component definition
 function Form({ handleSubmit, handleChange, formData, reservationsError, history }) {
   return (
     <div>
+      {/* Form layout with row and column structure */}
       <form onSubmit={handleSubmit} className="row g-3 mt-2">
+
+        {/* First Name input field */}
         <div className="col-md-6">
           <label htmlFor="first_name" className="form-label">
             First Name:
@@ -13,13 +18,14 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
             id="first_name"
             name="first_name"
             type="text"
-            onChange={handleChange}
+            onChange={handleChange} // Event handler for value change
             value={formData.first_name}
             required
             className="form-control"
           />
         </div>
 
+        {/* Last Name input field */}
         <div className="col-md-6">
           <label htmlFor="last_name" className="form-label">
             Last Name:
@@ -34,6 +40,8 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
             className="form-control"
           />
         </div>
+
+        {/* Mobile Number input field */}
         <div className="col-md-6">
           <label htmlFor="mobile_number" className="form-label">
             Mobile Number
@@ -49,6 +57,7 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
           />
         </div>
 
+        {/* Number of People input field */}
         <div className="col-md-6">
           <label htmlFor="people" className="form-label">
             Number of People
@@ -65,6 +74,7 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
           />
         </div>
 
+        {/* Date of Reservation input field */}
         <div className="col-md-6">
           <label htmlFor="reservation_date" className="form-label">
             Date of Reservation
@@ -80,6 +90,7 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
           />
         </div>
 
+        {/* Time of Reservation input field */}
         <div className="col-md-6">
           <label htmlFor="reservation_time" className="form-label">
             Time of Reservation
@@ -95,20 +106,25 @@ function Form({ handleSubmit, handleChange, formData, reservationsError, history
           />
         </div>
 
+        {/* Submit and Cancel buttons */}
         <button type="submit" className="btn btn-secondary">
           Submit
         </button>
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => history.goBack()}
+          onClick={() => history.goBack()} // Navigate to the previous page
         >
           Cancel
         </button>
       </form>
+
+      {/* Display any reservation errors */}
       <ErrorAlert error={reservationsError} />
     </div>
   );
 }
 
+// Export the Form component
 export default Form;
+
